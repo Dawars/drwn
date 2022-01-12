@@ -83,7 +83,7 @@ if [ ! -e zlib ] && [ "$1" == "zlib" ]; then
     tar zxvf zlib-${VERSION}.tar.gz
     ln -s zlib-${VERSION} ${CODEBASE}/external/zlib
     cd zlib
-    setenv CC gcc
+    export CC=gcc
     ./configure -t --shared
     make
     cd ..
