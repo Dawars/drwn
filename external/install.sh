@@ -41,24 +41,9 @@ fi
 
 # eigen
 if [ ! -e Eigen ] && [ "$1" == "Eigen" -o "$1" == "eigen" ]; then
-    VERSION="3.2.10"
-    wget --no-check-certificate http://bitbucket.org/eigen/eigen/get/${VERSION}.tar.bz2 -O eigen-${VERSION}.tar.bz2 || exit 1
-    bunzip2 eigen-${VERSION}.tar.bz2 || exit 1
-    tar xvf eigen-${VERSION}.tar
-    if [ -d "eigen-eigen-${VERSION}" ]; then
-        mv eigen-eigen-${VERSION} eigen-${VERSION}
-    elif [ -d eigen-eigen-bdd17ee3b1b3 ]; then # 3.2.5
-        mv eigen-eigen-bdd17ee3b1b3 eigen-${VERSION}
-    elif [ -d eigen-eigen-b30b87236a1b ]; then # 3.2.7
-        mv eigen-eigen-b30b87236a1b eigen-${VERSION}
-    elif [ -d eigen-eigen-07105f7124f9 ]; then # 3.2.8
-	mv eigen-eigen-07105f7124f9 eigen-${VERSION}
-    elif [ -d eigen-eigen-b9cd8366d4e8 ]; then # 3.2.10
-	mv eigen-eigen-b9cd8366d4e8 eigen-${VERSION}
-    else
-        echo "*** COULD NOT DETERMINE EIGEN DIRECTORY NAME ***"
-        exit 1
-    fi
+        VERSION="3.2.10"
+    wget --no-check-certificate https://gitlab.com/libeigen/eigen/-/archive/${VERSION}/eigen-${VERSION}.tar.bz2 || exit 1
+    tar xvf eigen-${VERSION}.tar.bz2 || exit 1
     rm -f eigen-${VERSION}.tar
     ln -s eigen-${VERSION}/Eigen ${CODEBASE}/external/Eigen
 fi
