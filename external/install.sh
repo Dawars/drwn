@@ -76,7 +76,7 @@ fi
 
 # zlib
 if [ ! -e zlib ] && [ "$1" == "zlib" ]; then
-    VERSION="1.2.8"
+    VERSION="1.2.11"
     wget -c http://zlib.net/zlib-${VERSION}.tar.gz || exit 1
     tar zxvf zlib-${VERSION}.tar.gz
     ln -s zlib-${VERSION} ${CODEBASE}/external/zlib
