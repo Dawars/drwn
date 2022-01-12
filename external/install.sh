@@ -50,7 +50,7 @@ fi
 
 # opencv
 if [ ! -e opencv ] && [ "$1" == "OpenCV" -o "$1" == "opencv" ]; then
-    VERSION="2.4.10"
+    VERSION="2.4.13"
     if [ ! -e "opencv-${VERSION}" ]; then
         if [ ! -e "opencv-${VERSION}.tar.gz" ]; then
             wget -c https://github.com/Itseez/opencv/archive/${VERSION}.tar.gz
@@ -67,9 +67,11 @@ if [ ! -e opencv ] && [ "$1" == "OpenCV" -o "$1" == "opencv" ]; then
     else
 	cmake -D CMAKE_BUILD_TYPE=RELEASE \
 	      -D CMAKE_INSTALL_PREFIX=${CODEBASE}/external/opencv \
-	      -D BUILD_NEW_PYTHON_SUPPORT=OFF .
+	      -D BUILD_NEW_PYTHON_SUPPORT=OFF \
+	      -DENABLE_PRECOMPILED_HEADERS=OFF \
+	      -DWITH_FFMPEG=OFF .
     fi
-    make
+    make -j$(nproc)
     make install
     cd ..
 fi
